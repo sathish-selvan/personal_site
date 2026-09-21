@@ -1,0 +1,31 @@
+export const meta = {
+  title: "Building this site with React, Vite, and MDX",
+  date: "2026-07-23",
+  description:
+    "Why a terminal-themed static site beat a heavier framework for a personal portfolio.",
+};
+
+I wanted a personal site that looked like the tools I actually work in all day — a
+terminal, not a marketing landing page. This post covers the stack behind it.
+
+## Stack
+
+- **Vite + React + TypeScript** for the build tooling — fast dev server, zero
+  server-side runtime needed.
+- **MDX** for blog posts — write in Markdown, drop in a React component when I
+  need one, no CMS or database required.
+- **Static hosting** — the whole thing builds to plain files, so it deploys for
+  free on Cloudflare Pages, Netlify, or GitHub Pages.
+
+## Adding a new post
+
+Every post is just a `.mdx` file in `src/content/blog/`. Each one exports a
+`meta` object with a title, date, and description, and the rest of the file is
+the post body. The blog list page picks up new files automatically — no config
+changes needed.
+
+```bash
+touch src/content/blog/my-new-post.mdx
+```
+
+That's it — write, save, and it shows up on `/blog`.

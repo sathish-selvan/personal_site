@@ -1,0 +1,389 @@
+:root {
+  --bg: #0c0f0b;
+  --panel: #111510;
+  --panel-alt: #0f130f;
+  --fg: #c9f2d8;
+  --fg-bright: #ffffff;
+  --muted: #6f8a78;
+  --accent: #33ff99;
+  --accent2: #ffb454;
+  --border: #1f2a20;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--muted);
+}
+
+::selection {
+  background: var(--accent);
+  color: #04140b;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+/* ---- terminal window chrome ---- */
+.term-window {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+  margin-bottom: 2rem;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--panel-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.term-bar .dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.term-bar span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #333;
+}
+.term-bar span:nth-child(1) {
+  background: #ff5f57;
+}
+.term-bar span:nth-child(2) {
+  background: #febc2e;
+}
+.term-bar span:nth-child(3) {
+  background: #28c840;
+}
+
+.term-bar .path {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.term-body {
+  padding: 1.75rem 1.9rem 2.25rem;
+}
+
+/* ---- nav ---- */
+.nav {
+  display: flex;
+  gap: 1.4rem;
+  font-size: 0.85rem;
+  margin-bottom: 2.5rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+}
+
+.nav a::before {
+  content: "./";
+  color: var(--border);
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ---- hero ---- */
+.prompt {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.prompt b {
+  color: var(--accent2);
+}
+
+.hero-name {
+  font-size: 1.6rem;
+  margin: 0.6rem 0 0.2rem;
+  color: var(--fg-bright);
+}
+
+.cursor {
+  display: inline-block;
+  width: 9px;
+  height: 1.1em;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
+
+.hero-role {
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-bottom: 1.1rem;
+}
+
+.hero-about {
+  color: var(--fg);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 52ch;
+}
+
+/* ---- sections ---- */
+.section-label {
+  color: var(--muted);
+  font-size: 0.72rem;
+  margin: 2.8rem 0 1.3rem;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+}
+.section-label::before {
+  content: "# ";
+  color: var(--border);
+}
+
+.exp-item {
+  margin-bottom: 2rem;
+  font-size: 0.88rem;
+}
+.exp-item:last-child {
+  margin-bottom: 0;
+}
+.exp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.exp-item .role {
+  color: var(--fg-bright);
+  font-weight: 600;
+}
+.exp-item .org {
+  color: var(--accent2);
+}
+.exp-item .dates {
+  color: var(--muted);
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+.exp-summary {
+  margin: 0.5rem 0 0.7rem;
+  color: var(--fg);
+  line-height: 1.7;
+  max-width: 58ch;
+}
+
+.edu-line {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+.edu-line .degree {
+  color: var(--fg-bright);
+}
+.edu-line .school {
+  color: var(--accent2);
+}
+.edu-line .dates {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tags span {
+  border: 1px solid var(--border);
+  color: var(--accent);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.72rem;
+}
+.tags.plain {
+  gap: 0;
+  row-gap: 0.3rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.tags.plain span {
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.tags.plain span:not(:last-child)::after {
+  content: " · ";
+  color: var(--border);
+}
+
+.edu-item {
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+.edu-item .degree {
+  color: var(--fg-bright);
+}
+.edu-item .school {
+  color: var(--accent2);
+  font-size: 0.8rem;
+}
+.edu-item .dates {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.links {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.8rem;
+}
+.links a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--muted);
+}
+.links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ---- blog list ---- */
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.post-list li {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+}
+.post-list a {
+  color: var(--fg-bright);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.post-list a:hover {
+  color: var(--accent);
+}
+.post-date {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+}
+.post-desc {
+  color: var(--fg);
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+}
+
+/* ---- blog post / mdx content ---- */
+.post-header {
+  margin-bottom: 2rem;
+}
+.post-title {
+  color: var(--fg-bright);
+  font-size: 1.4rem;
+  margin: 0.4rem 0;
+}
+.post-meta {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.mdx-content {
+  font-size: 0.9rem;
+}
+.mdx-content h2 {
+  color: var(--fg-bright);
+  font-size: 1.05rem;
+  margin-top: 2rem;
+}
+.mdx-content p {
+  color: var(--fg);
+}
+.mdx-content a {
+  color: var(--accent);
+}
+.mdx-content code {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.85em;
+  color: var(--accent2);
+}
+.mdx-content pre {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+.mdx-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--fg);
+}
+.mdx-content ul {
+  padding-left: 1.1rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2.5rem;
+  font-size: 0.8rem;
+}
+
+footer.site-footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
