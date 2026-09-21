@@ -1,41 +1,37 @@
 import { Link, useParams } from "react-router-dom";
+import Footer from "../components/Footer";
 import Nav from "../components/Nav";
-import TerminalWindow from "../components/TerminalWindow";
-import { getPost } from "../lib/posts";
+import { formatDate, getPost } from "../lib/posts";
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPost(slug) : undefined;
 
   return (
-    <div className="container">
+    <>
       <Nav />
-      <TerminalWindow path={`~/blog/${slug ?? ""}`}>
+      <main className="wrap">
+        <Link className="back-link" to="/blog">
+          ← All posts
+        </Link>
         {!post ? (
-          <>
-            <p className="hero-about">Post not found.</p>
-            <Link className="back-link" to="/blog">
-              ← back to blog
-            </Link>
-          </>
+          <div className="page-head">
+            <h1 className="page-title">Post not found</h1>
+            <p className="page-lead">That post doesn't exist (yet).</p>
+          </div>
         ) : (
-          <>
-            <div className="post-header">
-              <div className="prompt">
-                <b>sathish@portfolio</b> ~/blog % cat {post.slug}.mdx
-              </div>
+          <article>
+            <header className="page-head" style={{ paddingTop: "1rem" }}>
               <h1 className="post-title">{post.title}</h1>
-              <div className="post-meta">{post.date}</div>
-            </div>
-            <div className="mdx-content">
+              <div className="post-meta">{formatDate(post.date)}</div>
+            </header>
+            <div className="prose">
               <post.Component />
             </div>
-            <Link className="back-link" to="/blog">
-              ← back to blog
-            </Link>
-          </>
+          </article>
         )}
-      </TerminalWindow>
-    </div>
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -1,88 +1,111 @@
+import { FaDownload, FaEnvelope, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import Footer from "../components/Footer";
 import Nav from "../components/Nav";
-import InfoCard from "../components/InfoCard";
 import TechBadge from "../components/TechBadge";
-import TerminalWindow from "../components/TerminalWindow";
-import { profile, experience, coreStack, education } from "../data/resume";
+import { coreStack, education, experience, profile, stats } from "../data/resume";
 
 export default function Home() {
   return (
     <>
-      <div className="container">
-        <Nav />
-        <TerminalWindow path="~/about">
-          <div className="prompt">
-            <b>sathish@portfolio</b> ~ % whoami
-          </div>
+      <Nav />
+      <main className="wrap">
+        <section className="hero">
+          <p className="hero-hello">Hi, I'm</p>
           <h1 className="hero-name">
             {profile.name}
-            <span className="cursor"></span>
+            <span className="cursor" aria-hidden="true" />
           </h1>
-          <div className="hero-role">{profile.role}</div>
-          <p className="hero-about">{profile.tagline}</p>
+          <p className="hero-role">{profile.role}</p>
+          <p className="hero-tagline">{profile.tagline}</p>
+          <p className="hero-meta">{profile.location}</p>
 
-          <div className="links">
-            <a href={profile.github} target="_blank" rel="noreferrer">
-              GitHub
+          <div className="cta-row">
+            <a className="btn btn-primary" href={`mailto:${profile.email}`}>
+              <FaEnvelope aria-hidden="true" /> Get in touch
             </a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn
+            <a className="btn" href={profile.resumeUrl} download>
+              <FaDownload aria-hidden="true" /> Résumé
             </a>
-            <a href={`mailto:${profile.email}`}>Email</a>
-            <a href={profile.resumeUrl} download>
-              Résumé (PDF)
+            <a className="btn" href={profile.linkedin} target="_blank" rel="noreferrer">
+              <FaLinkedinIn aria-hidden="true" /> LinkedIn
+            </a>
+            <a className="btn" href={profile.github} target="_blank" rel="noreferrer">
+              <FaGithub aria-hidden="true" /> GitHub
             </a>
           </div>
 
-          <div className="section-label">experience</div>
-          {experience.map((job) => (
-            <div className="exp-item" key={job.role + job.org}>
-              <div className="exp-head">
-                <span>
-                  <span className="role">{job.role}</span>
-                  <span className="org"> · {job.org}</span>
-                </span>
-                <span className="dates">{job.dates}</span>
-              </div>
-              {job.summary && <p className="exp-summary">{job.summary}</p>}
-              <div className="card-list">
-                {job.highlights.map((h) => (
-                  <InfoCard key={h.title} {...h} />
-                ))}
-              </div>
-              {job.tags && (
-                <div className="tags plain">
-                  {job.tags.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+          <ul className="stats">
+            {stats.map((s) => (
+              <li className="stat" key={s.label}>
+                <span className="stat-value">{s.value}</span>
+                <span className="stat-label">{s.label}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-          <div className="section-label">core stack</div>
+        <section className="section" id="experience">
+          <p className="kicker">01 · Experience</p>
+          <h2 className="section-title">Where I've worked</h2>
+          <ol className="timeline">
+            {experience.map((job) => (
+              <li
+                className={job.featured ? "role current" : "role"}
+                key={job.role + job.org}
+              >
+                <h3 className="role-title">{job.role}</h3>
+                <p className="role-meta">
+                  <span className="role-org">{job.org}</span>
+                  <span className="role-dates">{job.dates}</span>
+                  {job.featured && <span className="pill">Current</span>}
+                </p>
+                {job.summary && <p className="role-summary">{job.summary}</p>}
+
+                <ul className="bullets">
+                  {job.highlights.map((h) => (
+                    <li key={h.title}>
+                      <strong>{h.title} :</strong> {h.description}
+                    </li>
+                  ))}
+                </ul>
+
+                {job.tags && (
+                  <ul className="chips" aria-label="Technologies">
+                    {job.tags.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="section" id="stack">
+          <p className="kicker">02 · Toolbox</p>
+          <h2 className="section-title">Core stack</h2>
           <ul className="tech-grid">
             {coreStack.map((t) => (
               <TechBadge key={t} name={t} />
             ))}
           </ul>
+        </section>
 
-          <div className="section-label">education</div>
-          <div className="card-list">
+        <section className="section" id="education">
+          <p className="kicker">03 · Education</p>
+          <h2 className="section-title">Where I studied</h2>
+          <ul className="edu-list">
             {education.map((e) => (
-              <InfoCard
-                key={e.degree}
-                title={e.degree}
-                subtitle={e.school}
-                meta={e.dates}
-                badge={e.status}
-              />
+              <li className="edu-item" key={e.degree}>
+                <span className="edu-degree">{e.degree}</span>
+                <span className="edu-school">{e.school}</span>
+                <span className="edu-dates">{e.dates}</span>
+              </li>
             ))}
-          </div>
-        </TerminalWindow>
-      </div>
-      <footer className="site-footer">
-        © {new Date().getFullYear()} {profile.name} · built with React + Vite
-      </footer>
+          </ul>
+        </section>
+      </main>
+      <Footer />
     </>
   );
 }

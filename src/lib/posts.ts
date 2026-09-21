@@ -24,6 +24,15 @@ export const posts: Post[] = Object.entries(modules)
   })
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 
+export function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 export function getPost(slug: string): Post | undefined {
   return posts.find((p) => p.slug === slug);
 }

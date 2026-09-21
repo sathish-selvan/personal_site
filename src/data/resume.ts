@@ -10,6 +10,12 @@ export const profile = {
   resumeUrl: "/resume.pdf",
 };
 
+export const stats = [
+  { value: "5+", label: "Years of experience" },
+  { value: "3", label: "Companies" },
+  { value: "M.Tech", label: "AI & ML" },
+];
+
 export type Highlight = {
   title: string;
   subtitle?: string;
@@ -21,6 +27,7 @@ export type Experience = {
   org: string;
   dates: string;
   summary?: string;
+  featured?: boolean;
   highlights: Highlight[];
   tags?: string[];
 };
@@ -30,8 +37,7 @@ export const experience: Experience[] = [
     role: "Enterprise Software Engineer II",
     org: "Medtronic",
     dates: "Apr 2026 — Present",
-    summary:
-      "Currently working on two new initiatives across the organisation:",
+    featured: true,
     highlights: [
       {
         title: "PORT",
