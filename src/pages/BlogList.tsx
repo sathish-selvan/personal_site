@@ -12,9 +12,7 @@ export default function BlogList() {
           <div className="prompt">
             <b>sathish@portfolio</b> ~/blog % ls
           </div>
-          <h1 className="hero-name" style={{ fontSize: "1.3rem" }}>
-            posts
-          </h1>
+          <h1 className="section-label page-title">posts</h1>
           {posts.length === 0 ? (
             <p className="hero-about">No posts yet — check back soon.</p>
           ) : (

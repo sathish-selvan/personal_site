@@ -1,4 +1,6 @@
 import Nav from "../components/Nav";
+import InfoCard from "../components/InfoCard";
+import TechBadge from "../components/TechBadge";
 import TerminalWindow from "../components/TerminalWindow";
 import { profile, experience, coreStack, education } from "../data/resume";
 
@@ -41,30 +43,41 @@ export default function Home() {
                 </span>
                 <span className="dates">{job.dates}</span>
               </div>
-              <p className="exp-summary">{job.summary}</p>
-              <div className="tags plain">
-                {job.tags.map((t) => (
-                  <span key={t}>{t}</span>
+              {job.summary && <p className="exp-summary">{job.summary}</p>}
+              <div className="card-list">
+                {job.highlights.map((h) => (
+                  <InfoCard key={h.title} {...h} />
                 ))}
               </div>
+              {job.tags && (
+                <div className="tags plain">
+                  {job.tags.map((t) => (
+                    <span key={t}>{t}</span>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
 
           <div className="section-label">core stack</div>
-          <div className="tags plain">
+          <ul className="tech-grid">
             {coreStack.map((t) => (
-              <span key={t}>{t}</span>
+              <TechBadge key={t} name={t} />
             ))}
-          </div>
+          </ul>
 
           <div className="section-label">education</div>
-          {education.map((e) => (
-            <div className="edu-line" key={e.degree}>
-              <span className="degree">{e.degree}</span>
-              <span className="school"> · {e.school}</span>
-              <span className="dates"> · {e.dates}</span>
-            </div>
-          ))}
+          <div className="card-list">
+            {education.map((e) => (
+              <InfoCard
+                key={e.degree}
+                title={e.degree}
+                subtitle={e.school}
+                meta={e.dates}
+                badge={e.status}
+              />
+            ))}
+          </div>
         </TerminalWindow>
       </div>
       <footer className="site-footer">

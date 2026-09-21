@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { profile } from "../data/resume";
 
 export default function Nav() {
   return (
@@ -9,7 +10,7 @@ export default function Nav() {
       <NavLink to="/blog" className={({ isActive }) => (isActive ? "active" : "")}>
         blog
       </NavLink>
-      <a href="mailto:sathish.t2000@gmail.com">contact</a>
+      <a href={`mailto:${profile.email}`}>contact</a>
     </nav>
   );
 }

@@ -169,15 +169,23 @@ a {
 
 /* ---- sections ---- */
 .section-label {
-  color: var(--muted);
-  font-size: 0.72rem;
-  margin: 2.8rem 0 1.3rem;
+  color: var(--fg-bright);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 3rem 0 1.4rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--border);
   text-transform: lowercase;
   letter-spacing: 0.04em;
 }
 .section-label::before {
   content: "# ";
-  color: var(--border);
+  color: var(--accent);
+}
+
+.section-label.page-title {
+  font-size: 1.3rem;
+  margin: 1.6rem 0 1rem;
 }
 
 .exp-item {
@@ -213,19 +221,85 @@ a {
   max-width: 58ch;
 }
 
-.edu-line {
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
+/* ---- cards (experience highlights, education) ---- */
+.card-list {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0.8rem 0 0.9rem;
 }
-.edu-line .degree {
+.info-card {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+}
+.info-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.info-title {
   color: var(--fg-bright);
+  font-weight: 600;
+  font-size: 0.9rem;
 }
-.edu-line .school {
-  color: var(--accent2);
+.info-badge {
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.05rem 0.55rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.03em;
 }
-.edu-line .dates {
+.info-meta {
+  margin-left: auto;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+.info-sub {
+  color: var(--accent2);
+  font-size: 0.76rem;
+  margin-top: 0.15rem;
+}
+.info-desc {
+  margin: 0.45rem 0 0;
+  color: var(--fg);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+/* ---- tech stack ---- */
+.tech-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.6rem;
+}
+.tech-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.82rem;
+  color: var(--fg);
+  transition: border-color 0.15s;
+}
+.tech-badge svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  flex-shrink: 0;
+  color: var(--brand, var(--accent));
+}
+.tech-badge:hover {
+  border-color: var(--brand, var(--accent));
 }
 
 .tags {
@@ -258,22 +332,6 @@ a {
   color: var(--border);
 }
 
-.edu-item {
-  font-size: 0.88rem;
-  margin-bottom: 1rem;
-}
-.edu-item .degree {
-  color: var(--fg-bright);
-}
-.edu-item .school {
-  color: var(--accent2);
-  font-size: 0.8rem;
-}
-.edu-item .dates {
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
 .links {
   margin-top: 1.4rem;
   display: flex;
@@ -302,12 +360,24 @@ a {
   padding: 1rem 0;
 }
 .post-list a {
-  color: var(--fg-bright);
-  text-decoration: none;
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
   font-size: 0.95rem;
+  font-weight: 600;
+}
+.post-list a::after {
+  content: " →";
+  display: inline-block;
+  transition: transform 0.15s;
 }
 .post-list a:hover {
-  color: var(--accent);
+  color: var(--fg-bright);
+  text-decoration-style: solid;
+}
+.post-list a:hover::after {
+  transform: translateX(4px);
 }
 .post-date {
   display: block;
